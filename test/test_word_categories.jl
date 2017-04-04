@@ -6,7 +6,8 @@ const WORD_CLASSES = Dict(
     "kettő" => FRONT_LONG,
     "ír"    => BACK,
     "segít" => FRONT_SHORT,
-    "béka"  => BACK
+    "béka"  => BACK,
+    "cica"  => BACK,
 )
 
 @testset "word categorizing" begin

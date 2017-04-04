@@ -8,21 +8,19 @@ const ALL_VOWELS = Set{Char}(
     [ 'a', 'e', 'i', 'o', 'ö', 'u', 'ü',
       'á', 'é', 'í', 'ó', 'ő', 'ú', 'ű']
 )
-
 const BACK_VOWELS        = Set{Char}(['a', 'á', 'o', 'ó', 'u', 'ú'])
 const SHORT_FRONT_VOWELS = Set{Char}(['e', 'ö', 'ü'])
 const LONG_FRONT_VOWELS  = Set{Char}(['é', 'ő', 'ű'])
 const I_VOWELS           = Set{Char}(['i', 'í'])
 
-@assert BACK_VOWELS ∪ SHORT_FRONT_VOWELS ∪ LONG_FRONT_VOWELS ∪ I_VOWELS == ALL_VOWELS 
+@assert BACK_VOWELS ∪ SHORT_FRONT_VOWELS ∪ LONG_FRONT_VOWELS ∪ I_VOWELS == ALL_VOWELS
 
 is_vowel(c::Char)           = c in ALL_VOWELS
 is_backvowel(c::Char)       = c in BACK_VOWELS
 is_shortfrontvowel(c::Char) = c in SHORT_FRONT_VOWELS
 is_longfrontvowel(c::Char)  = c in LONG_FRONT_VOWELS
+is_ivowel(c::Char)          = c in I_VOWELS
 is_frontvowel(c::Char)      = is_shortfrontvowel(c) || is_longfrontvowel(c)
-
-is_ivowel(c::Char) = c in I_VOWELS
 
 function categorize_word(word::String)
     # Ordered list of vowels
@@ -49,4 +47,3 @@ function categorize_word(word::String)
 
     error("internal error, could not classify word: \"$word\"")
 end
-

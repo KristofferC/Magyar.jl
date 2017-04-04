@@ -1,7 +1,12 @@
 module Magyar
 
-export categorize_word
+using DataFrames
 
-include("word_categories.jl")
+export start_quiz, categorize_word
+
+include("Grammar/word_categories.jl")
+include("Database/nouns.jl")
+include("Quiz/quiz.jl")
 
 end # module
+
