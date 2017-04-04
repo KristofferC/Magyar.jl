@@ -1,3 +1,5 @@
+__precompile__()
+
 module Magyar
 
 using DataFrames
