@@ -1,5 +1,7 @@
 module Magyar
 
-# package code goes here
+export categorize_word
+
+include("word_categories.jl")
 
 end # module
