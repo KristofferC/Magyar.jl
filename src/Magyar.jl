@@ -1,6 +1,7 @@
 module Magyar
 
 using DataFrames
+using DataFramesMeta
 
 export start_quiz, categorize_word
 

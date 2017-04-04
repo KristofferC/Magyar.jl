@@ -1,3 +1,5 @@
+const ENG_TO_HU_PROBABILITY = 0.25
+
 function _query()
     print(STDOUT, ">> ")
     return strip(readline(STDIN))
@@ -23,15 +25,32 @@ function start_quiz()
     quizzes[choice][2]()
 end
 
+function get_random_sample(df)
+    i = rand(1:size(df,1))
+    return df[i, :]
+end
+
 function quiz_nouns()
+    filtered = @where(NOUNS, :difficulty .== Magyar.EASY)
     while true
-        noun = get_random_noun()
-        println(noun[:word][1])
-        answer = _query()
-        if answer == noun[:translation][1]
-            print("Correct!\n\n")
-        else
-            print("Wrong!\n\n")
+        noun = get_random_sample(filtered)
+        questions, keys = noun[:word][1], noun[:translation][1]
+        lang = "hu"
+        if rand() < ENG_TO_HU_PROBABILITY
+            questions, keys = keys, questions
+            lang = "en"
         end
+        question = questions[rand(1:end)]
+        @async run(`espeak -v $lang "$question"`)
+        println(question)
+        answer = _query()
+        if answer in keys
+            print("Correct!\n\n")
+            run(`espeak -v en "Correct"`)
+        else
+            print("Wrong! Correct answer was: ", join(keys, ','), "\n\n")
+            run(`espeak -v en "Wrong"`)
+        end
+        sleep(0.1)
     end
 end
